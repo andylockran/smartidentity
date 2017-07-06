@@ -1,28 +1,29 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# SmartIdentity
 
-## How to use this template
+SmartIdentity extends the work hosted at [SmartID](https://github.com/smartidentity).
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+This demonstration uses the Ionic Framework v2 to help provide a simple use case of an identity application.
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+## Architecture
 
-### With the Ionic CLI:
+SmartIdentity utilises the following technology paradigms:  
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
+* Public key cryptography
+* Blockchain (for immutable transaction history)
+* PGP - for establishing and auditing a web of trust.
+
+I anticipate the publication of a more detailed explanation of the platform once there is demand for it.
+
+## Preparing for the first run
+
+### Setup the Ionic CLI:
+
+To install Ionic for your machine, you'll require nodejs.org installed.
 
 ```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myTabs tabs
+$ sudo npm install -g ionic@latest cordova
+$ cd smartidentity
 ```
-
-Then, to run it, cd into `myTabs` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
 
 ### Firebase Config
 
@@ -38,3 +39,19 @@ export const firebaseConfig = {
     messagingSenderId: ""
 };
 ```
+
+### Running the app
+
+Ionic allows the app to be run as a PWA (Progressive Web App) - which is my preferred mode of operation.  However,
+it's far more powerful and will also allow for the app to be compiled on top of the cordova tools.
+
+If you want to try and run this on a phone.  Specify your platform like below:
+
+```bash
+$ ionic cordova platform add ios
+$ ionic cordova run ios
+```
+
+Substitute ios for android if not on a Mac.
+
+For further information, visit [www.ionicframework.com](https://www.ionicframework.com).
