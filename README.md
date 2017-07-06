@@ -24,3 +24,15 @@ $ ionic cordova run ios
 
 Substitute ios for android if not on a Mac.
 
+### Firebase Config
+
+To allow firebase to work, setup your app and save the config as `src\app\firebaseConfig.ts` as follows:
+
+  export const firebaseConfig = {
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: ""
+  };
