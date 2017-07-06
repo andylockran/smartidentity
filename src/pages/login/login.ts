@@ -56,7 +56,7 @@ export class LoginPage {
     } else {
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password)
         .then(authData => {
-          this.navCtrl.setRoot('HomePage');
+          this.navCtrl.setRoot('IdentityPage');
         }, error => {
           this.loading.dismiss().then(() => {
             let alert = this.alertCtrl.create({
