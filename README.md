@@ -28,11 +28,13 @@ Substitute ios for android if not on a Mac.
 
 To allow firebase to work, setup your app and save the config as `src\app\firebaseConfig.ts` as follows:
 
-  export const firebaseConfig = {
+```javascript
+export const firebaseConfig = {
     apiKey: "",
     authDomain: "",
     databaseURL: "",
     projectId: "",
     storageBucket: "",
     messagingSenderId: ""
-  };
+};
+```
