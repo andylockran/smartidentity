@@ -9,7 +9,7 @@ This demonstration uses the Ionic Framework v2 to help provide a simple use case
 SmartIdentity utilises the following technology paradigms:  
 
 * Public key cryptography
-* Blockchain (for immutable transaction history)
+* Ethereum Blockchain (for immutable transaction history)
 * PGP - for establishing and auditing a web of trust.
 
 I anticipate the publication of a more detailed explanation of the platform once there is demand for it.
