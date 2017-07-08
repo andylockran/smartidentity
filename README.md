@@ -55,3 +55,13 @@ $ ionic cordova run ios
 Substitute ios for android if not on a Mac.
 
 For further information, visit [www.ionicframework.com](https://www.ionicframework.com).
+
+### Security disclaimer
+
+This app is very much a functional demonstration, and as such all decisions made have not (yet) been security vetted.
+
+Your encryption keys should never be transmitted over a network, so lots more work will be done on decoupling this from firebase, and using encrypted LocalStorage on device for certain key management, or leveraging the inbuilt functionality of certain platforms.
+
+If you want to help write up a white-paper on how best to do key-management for a non-geek audience, please spend lots of time researching before throwing your two cents in.  Securing this stuff the right way does not mean looking for shortcuts, and as a rule the npm modules that have been used in the development of this app are by no means security-vetted for this purpose.
+
+Hopefully the codebase will develop to a point whereby I can start working on the solutions for some of these problems.  At the core I intend to follow to best practices of the OpenPGP community, and part of the protocol hardening will be the ability for each individual user to set their own encryption levels.  This has to be 'secure by default'.
