@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AttributeProvider } from '../../providers/attribute/attribute';
+
 
 /**
  * Generated class for the AttributeListPage page.
@@ -14,11 +16,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AttributeListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  attributes: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public attrP: AttributeProvider) {
+    this.attrP.getAttributes().subscribe( data => {
+      this.attributes = data;
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AttributeListPage');
+  ionViewDidEnter() {
+    console.log(this.attributes);
   }
 
+  addAttribute() {
+    this.navCtrl.push("AttributeAddPage");
+  }
+
+  attributeDetails(attribute) {
+    this.navCtrl.push("AttributeDetailPage", { attribute: attribute });
+  }
 }

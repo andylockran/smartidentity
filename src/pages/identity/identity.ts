@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth';
+import { IdentityProvider } from '../../providers/identity/identity';
 
 /**
  * Generated class for the IdentityPage page.
@@ -14,11 +16,35 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class IdentityPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  rootIdentity: any;
+  loading: any;
+  subs: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider,
+    private loadingCtrl: LoadingController, private alertCtrl: AlertController, public idP: IdentityProvider) {
+
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+    });
+    
+    this.subs = this.idP.getIdentity().subscribe(data => {
+      this.rootIdentity = data;
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad IdentityPage');
+  addIdentity() {
+    this.idP.addRootIdentity();
+  }
+  
+  logout() {
+    console.log("Logging out user");
+    this.rootIdentity = "";
+    this.navCtrl.setRoot("LoginPage");
+    this.auth.logoutUser();
+  }
+
+  log() {
+    console.log(this.rootIdentity);
   }
 
 }

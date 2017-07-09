@@ -7,12 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>identity</ion-title>
+    <ion-title>My Identity</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">Logout</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <button *ngIf="!rootIdentity?.hash" ion-button (click)="addIdentity()">Initiate</button>
+    <button ion-button button (click)="log()">Log</button>
+    <h2>{{ rootIdentity?.hash }}</h2>
+    <p>Your identity is setup, so you can continue using the app.</p>
+    <ion-list>
+      <h3>EncryptionKeys: </h3>
+      <ion-icon *ngIf=rootIdentity?.encryptionKeys name="checkmark"></ion-icon>
+      <h3>SigningKeys: </h3>
+      <ion-icon *ngIf=rootIdentity?.signingKeys name="checkmark"></ion-icon>
+      <h3>EthereumKeys:</h3>
+      <ion-icon *ngIf=rootIdentity?.ethereumKeys name="checkmark"></ion-icon>
+    </ion-list>
 </ion-content>

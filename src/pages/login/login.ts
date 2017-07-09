@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {
   IonicPage,
   NavController,
-  NavParams,
   LoadingController,
   Loading,
   AlertController
@@ -10,6 +9,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the LoginPage page.
  *
@@ -28,7 +28,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public authData: AuthProvider,
     public formBuilder: FormBuilder, public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController, public navParams: NavParams) {
+    public loadingCtrl: LoadingController) {
 
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required,
@@ -56,7 +56,8 @@ export class LoginPage {
     } else {
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password)
         .then(authData => {
-          this.navCtrl.setRoot('IdentityPage');
+          console.log(authData);
+          this.navCtrl.setRoot(TabsPage);
         }, error => {
           this.loading.dismiss().then(() => {
             let alert = this.alertCtrl.create({
