@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AuthProvider } from '../auth/auth';
 /*
   Generated class for the AttributeProvider provider.
 
@@ -11,8 +11,24 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AttributeProvider {
 
-  constructor(public http: Http) {
-    console.log('Hello AttributeProvider Provider');
+  uid: any;
+  attributes: FirebaseListObservable<any>;
+
+  constructor(public afDB: AngularFireDatabase, public auth: AuthProvider) {
+    //console.log('Hello AttributeProvider Provider');
+    this.auth.afAuth.authState.subscribe(authData => {
+      let uid = authData.uid;
+      this.uid = uid;
+    });
+    this.attributes = this.getAttributes();
   }
 
+  getAttributes(): FirebaseListObservable<any> {
+    return this.attributes = this.afDB.list('/user/' + this.uid + '/rootIdentity/attributes');
+  }
+
+  addAttribute(data) {
+    let attributes = this.getAttributes();
+    attributes.push(data);
+  }
 }

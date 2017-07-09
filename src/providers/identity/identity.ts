@@ -14,8 +14,8 @@ import * as keypair from 'keypair';
 @Injectable()
 export class IdentityProvider {
 
-  identities: FirebaseListObservable<any[]>;
   uid: any;
+  identity: FirebaseObjectObservable<any[]>;
 
   constructor(public afDB: AngularFireDatabase, public auth: AuthProvider) {
     this.auth.afAuth.authState.subscribe(authData => {
@@ -23,16 +23,11 @@ export class IdentityProvider {
       this.uid = uid;
       console.log("Uid is:", this.uid);
     });
-    this.identities = this.getIdentities();
+    this.identity = this.getIdentity();
   }
 
-  getIdentities(): FirebaseListObservable<any> {
-    let identities = this.afDB.list('/user/' + this.uid + '/identities');
-    return identities;
-  }
-
-  getIdentity(identity: string): FirebaseObjectObservable<any> {
-    let rootIdentity = this.afDB.object('/user/' + this.uid + '/identities/rootIdentity');
+  getIdentity(): FirebaseObjectObservable<any> {
+    let rootIdentity = this.afDB.object('/user/' + this.uid + '/rootIdentity');
     return rootIdentity;
   }
 
@@ -46,19 +41,8 @@ export class IdentityProvider {
       encryptionKeys: encryptionKeys,
       signingKeys: signingKeys
     }
-    this.updateIdentity('rootIdentity', identityData);
-  }
-
-  updateIdentity(identity: string, data: any) {
-    let identities = this.getIdentities();
-    console.log(this.uid);
-    identities.update(identity, data).then(
-      newIdentity => {
-        console.log("Identity updated:", identity);
-      },
-      error => {
-        console.log(error);
-      });
+    let rootIdentity = this.afDB.object('/user/' + this.uid + '/rootIdentity');
+    rootIdentity.update(identityData);
   }
 
   generateEthereumKeys() {
@@ -67,6 +51,7 @@ export class IdentityProvider {
     var dk = keythereum.create(params);
     return dk;
   }
+  
   generateRSAKeys() {
     console.log("Generating rsa keys.");
     let keys = keypair({ bits: 1024 });

@@ -18,6 +18,7 @@ export class IdentityPage {
 
   rootIdentity: any;
   loading: any;
+  subs: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider,
     private loadingCtrl: LoadingController, private alertCtrl: AlertController, public idP: IdentityProvider) {
@@ -26,7 +27,7 @@ export class IdentityPage {
       content: 'Please wait...',
     });
     
-    this.idP.getIdentity('rootIdentity').subscribe(data => {
+    this.subs = this.idP.getIdentity().subscribe(data => {
       this.rootIdentity = data;
     });
   }
@@ -37,6 +38,7 @@ export class IdentityPage {
   
   logout() {
     console.log("Logging out user");
+    this.rootIdentity = "";
     this.navCtrl.setRoot("LoginPage");
     this.auth.logoutUser();
   }

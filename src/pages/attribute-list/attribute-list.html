@@ -7,12 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>attribute-list</ion-title>
+    <ion-title>Attributes</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addAttribute()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <button ion-button button (click)="addAttribute()">Add attribute</button>
+  <pre>{{ attributes | json }}</pre>
+  <ion-list>
+    <ion-item *ngFor="let attr of attributes">
+      <ion-label>{{ attributes | json }}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
